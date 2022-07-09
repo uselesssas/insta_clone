@@ -69,4 +69,5 @@ group :development do
 end
 
 gem 'devise'
+gem 'gravtastic'
 gem 'font-awesome-rails'

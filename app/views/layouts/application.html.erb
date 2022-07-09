@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>InstaClone</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,19 +11,15 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
-    <% if user_signed_in? %>
-      <header>
-        <%= render 'shared/navbar' %>
-      </header>
-  <% end %>
+    <%= render 'shared/navbar' if user_signed_in? %>
 
-    <main>
-      <% if notice %>
-        <p class="notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert"><%= alert %></p>
-      <% end %>
+    <% flash.each do |k, v| %>
+      <%= tag.div v, class: "alert alert-#{k}", role: 'alert' %>
+    <% end %>
+
+    <main class="container">
+
+
 
       <%= yield %>
     </main>

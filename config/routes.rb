@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show edit update]
 
-  resources :posts, only: %i[index show create] do
+  resources :posts, only: %i[index show create destroy] do
     resources :photos, only: %i[create]
   end
 end

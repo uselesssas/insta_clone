@@ -4,10 +4,15 @@
     <%= image_tag avatar_url(post.user) %>
   <% end %>
 
+  <%= link_to post_path(post) do %>
+   <p><%= post.description %></p>
+  <% end %>
 
+    <% post.photos.each do |photo| %>
+      <%= image_tag photo.image.url(:standard) %>
+    <% end %>
 
-  <p><%= post.description %></p>
-  <% post.photos.each do |photo| %>
-    <%= image_tag photo.image.url(:standard) %>
+  <% if post.belongs_to_user?(current_user) %>
+    <%= link_to 'Удалить пост', post_path(post), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
   <% end %>
 <% end %>

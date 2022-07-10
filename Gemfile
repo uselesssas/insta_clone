@@ -70,3 +70,5 @@ end
 
 gem 'devise'
 gem 'font-awesome-rails'
+gem 'carrierwave', '~> 2.0'
+gem "mini_magick"

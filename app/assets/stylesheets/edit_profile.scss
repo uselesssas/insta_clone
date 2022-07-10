@@ -1,0 +1,58 @@
+.user-edit-page {
+  display: flex;
+  margin-top: 40px;
+  min-height: 500px;
+
+  .actions {
+    width: 220px;
+    border: 1px solid #DBDBDBFF;
+
+    .nav-link {
+      font-size: 14px;
+      background-color: #FFFFFFFF;
+      color: #000000FF;
+      border-radius: 0;
+      padding: 12px 0 12px 30px;
+    }
+    .nav-link-danger {
+      font-size: 14px;
+      background-color: #FFFFFFFF;
+      color: #FF0000FF;
+      border-radius: 0;
+      padding: 12px 0 12px 30px;
+      text-decoration: none;
+    }
+    .nav-pills .nav-link.active{
+      border-left: 2px solid;
+      font-weight: 600;
+    }
+  }
+  .details {
+    flex: 1;
+    border: 1px solid #DBDBDBFF;
+    border-left:none;
+  }
+}
+
+.form-edit-user {
+  padding: 30px 100px 10px 50px;
+  .form-group, input {
+    font-size: 14px;
+    color: #000000FF;
+  }
+  input, textarea {
+    border: 1px solid #EFEFEFFF;
+  }
+  .col-form-label {
+    text-align: right;
+    font-weight: 600;
+  }
+  .username {
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 0;
+  }
+  input[type='submit'] {
+    color: #FFFFFFFF;
+  }
+}

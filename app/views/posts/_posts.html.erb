@@ -1,0 +1,13 @@
+<% @posts.each do |post| %>
+  <br><br>
+  <%= link_to user_path(post.user) do %>
+    <%= image_tag avatar_url(post.user) %>
+  <% end %>
+
+
+
+  <p><%= post.description %></p>
+  <% post.photos.each do |photo| %>
+    <%= image_tag photo.image.url(:standard) %>
+  <% end %>
+<% end %>

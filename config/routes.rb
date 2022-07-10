@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: %i[show]
+  resources :users, only: %i[show edit update]
+
+  resources :posts, only: %i[index show create] do
+    resources :photos, only: %i[create]
+  end
 end

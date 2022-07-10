@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def icon(str)
-    "<i class=\"#{str}\"></i>".html_safe
+  def icon(icon, str = '')
+    "<i class=\"#{icon}\"></i>#{str}".html_safe
   end
 
   def avatar_url(user)

@@ -1,0 +1,88 @@
+// Avatar
+.profile {
+  .avatar {
+    width: 140px;
+    height: 140px;
+    margin: 40px auto;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+// User info
+.profile .user-info {
+  padding: 40px 0;
+  .user-section {
+    display: flex;
+  }
+  .username {
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 200;
+  }
+  .edit-profile {
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  .edit-profile button {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid #DBDBDBFF;
+    color: #262626FF;
+    font-size: 14px;
+    padding: 4px 10px;
+    font-weight: 500;
+  }
+  ul.posts {
+    padding-left: 0;
+    li {
+      display: inline;
+      padding-right: 40px;
+      font-size: 15px;
+    }
+  }
+  .name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .bio {
+    font-size: 15px;
+  }
+  .website {
+    color: #003569FF;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
+// User tabs
+.user-tabs {
+  border-top: 1px solid #EFEFEFFF;
+  display: flex;
+  justify-content: center;
+
+  a.tab {
+    margin-right: 50px;
+    line-height: 45px;
+    color: #999999FF;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    i {
+      padding-right: 5px;
+    }
+    &:hover {
+      border-top: 1px solid #262626FF;
+      color: #262626FF;
+    }
+  }
+  a.active {
+    border-top: 1px solid #262626FF;
+    color: #262626FF;
+  }
+}

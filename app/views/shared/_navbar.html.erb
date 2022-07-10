@@ -4,9 +4,8 @@
       <div>
         <%= link_to 'Instagram', root_path, class: 'navbar-brand' %>
       </div>
-      <div class="user-section">
-        <%= link_to icon('fa fa-compass'), root_path %>
-        <%= link_to icon('fa fa-heart'), root_path %>
+      <div class="icons-section">
+        <%= link_to icon('fa fa-compass'), posts_path %>
         <%= link_to icon('fa fa-user'), user_path(current_user) %>
         <%= link_to icon('fa fa-sign-out'), destroy_user_session_path,
                     data: {turbo_method: :delete, turbo_confirm: "Выйти из аккаунта #{current_user.username}?"} %>

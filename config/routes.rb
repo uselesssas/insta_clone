@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'posts#index'
 
   devise_for :users
 
@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index show create destroy] do
     resources :photos, only: %i[create]
+    resources :likes, only: %i[create destroy], shallow: true
+    resources :comments, only: %i[index create destroy], shallow: true
   end
 end

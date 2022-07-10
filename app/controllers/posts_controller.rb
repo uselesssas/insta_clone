@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show destroy]
 
   def index
-    @posts = Post.all.includes(:photos, :user).order('created_at desc')
+    @posts = Post.order(created_at: :desc)
+    # @posts = Post.all.includes(:photos, :user, :likes).order('created_at desc')
     @post = Post.new
   end
 
@@ -12,28 +13,28 @@ class PostsController < ApplicationController
       params[:images]&.each do |img|
         @post.photos.create(image: img)
       end
-
       redirect_to posts_path
       flash[:notice] = 'Пост сохранён.'
     else
-      flash[:alert] = 'Пост НЕ сохранён.'
+      flash[:alert] = 'Ошибка! Не удалось сохранить пост.'
       redirect_to posts_path
     end
   end
 
   def show
     @posts = @post.photos
+    @likes = @post.likes.includes(:user)
   end
 
   def destroy
     if @post.user == current_user
       if @post.destroy
-        flash[:notice] = 'Удалён'
+        flash[:notice] = 'Пост удалён.'
       else
-        flash[:alert] = 'Пост НЕ Удалён'
+        flash[:alert] = 'Ошибка! Не удалось удалить пост.'
       end
     else
-      flash[:alert] = 'нет прав('
+      flash[:alert] = 'Ошибка! У Вас недостаточно прав.'
     end
     redirect_to root_path
   end
@@ -49,6 +50,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :description
+    params.require(:post).permit(:description)
   end
 end

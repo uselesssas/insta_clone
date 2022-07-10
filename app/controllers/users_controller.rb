@@ -6,13 +6,17 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    current_user.update(user_params)
-    redirect_to current_user
+    if current_user.update(user_params)
+      redirect_to current_user
+      flash[:notice] = 'Данные обновлены.'
+    else
+      render :edit
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :username, :real_name, :website, :bio, :phone, :gender)
+    params.require(:user).permit(:username, :real_name, :website, :bio, :phone, :gender)
   end
 end

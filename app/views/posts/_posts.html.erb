@@ -8,9 +8,33 @@
    <p><%= post.description %></p>
   <% end %>
 
-    <% post.photos.each do |photo| %>
-      <%= image_tag photo.image.url(:standard) %>
+  <% post.photos.each do |photo| %>
+    <%= image_tag photo.image.url(:standard) %>
+  <% end %>
+
+  <% if post.liked?(current_user).present? %>
+    <%= link_to 'Убрать лайк', like_path(post.liked?(current_user)), data: {turbo_method: :delete}, remote: true %>
+  <% else %>
+    <%= link_to 'Лайк', post_likes_path(post), data: {turbo_method: :post}, remote: true %>
+  <% end %>
+
+
+  <% post.likes.each.with_index do |like, index| %>
+    <% if post.likes.size == 1 %>
+      <%= like.user.username %> likes this
+    <% elsif like == post.likes.last %>
+      and
+      <%= + like.user.username %> like this
+    <% elsif index > 1 %>
+      <%= 'and' + (post.likes.size-index).to_s + ' others' %> like this
+      <% break %>
+    <% elsif index == post.likes.size-2 || index == 1 %>
+      <%= like.user.username %>
+    <% else %>
+      <%= like.user.username + ', ' %>
     <% end %>
+  <% end %>
+
 
   <% if post.belongs_to_user?(current_user) %>
     <%= link_to 'Удалить пост', post_path(post), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>

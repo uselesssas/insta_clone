@@ -1,5 +1,5 @@
 <% @posts.each do |post| %>
-  <br><br>
+
   <%= link_to user_path(post.user) do %>
     <%= image_tag avatar_url(post.user) %>
   <% end %>
@@ -40,3 +40,49 @@
     <%= link_to 'Удалить пост', post_path(post), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
   <% end %>
 <% end %>
+<br><br>
+
+
+<% @posts.each do |post| %>
+  <div class="card mb-3 post-link">
+
+    <div class="card-body">
+      <%= link_to user_path(post.user) do %>
+        <%= image_tag avatar_url(post.user), class: 'user-avatar', align: 'middle' %>
+        <small><%= post.user.username %></small>
+      <% end %>
+      <i class="fa fa-trash"></i>
+    </div>
+
+    <% post.photos.each do |photo| %>
+      <%= image_tag photo.image.url(:standard), class: 'card-img-top' %>
+    <% end %>
+
+    <div class="card-body">
+      <p class="card-text"><small class="text-muted">
+        <%= "Last updated #{post.updated_at}" %>
+      </small></p>
+
+      <%= link_to post_path(post) do %>
+        <p><%= post.description %></p>
+      <% end %>
+    </div>
+
+
+
+    <hr>
+    <div class="card-body">
+      <p class="card-text">
+        rrr
+      </p>
+
+    </div>
+
+  </div>
+<% end %>
+
+
+
+
+
+

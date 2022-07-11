@@ -1,19 +1,17 @@
-<%= form_for @post, :html => { :multipart => true } do |f| %>
-  <div class="form-group">
-    <%= f.label :description %>
-  </div>
+<div class="form-post">
+  <%= form_for @post, :html => { multipart: :true } do |f| %>
+    <div class="mb-3">
+      <%= f.label 'Описание', class: 'form-label' %>
+      <%= f.text_field :description, class: 'form-control form-control-sm',
+                      placeholder: 'Поделитесь своими впечатлениями...' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.text_field :description %>
-  </div>
+    <div class="mb-3">
+      <%= file_field_tag "images[]", class: 'form-control form-control-sm', type: :file, multiple: true %>
+    </div>
 
-  <br>
-  <div class="form-group">
-    <%= file_field_tag "images[]", type: :file, multiple: true %>
-  </div>
-
-  <br>
-  <div class="text-center">
-    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    <div>
+      <%= f.submit 'Сохранить', class: 'btn btn-primary btn-sm' %>
+    </div>
+  <% end %>
+</div>

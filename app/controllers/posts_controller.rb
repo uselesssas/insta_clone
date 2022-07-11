@@ -23,7 +23,8 @@ class PostsController < ApplicationController
 
   def show
     @posts = @post.photos
-    @likes = @post.likes.includes(:user)
+    # @likes = @post.likes.includes(:user)
+    @likes = @post.likes.all
   end
 
   def destroy
@@ -36,17 +37,13 @@ class PostsController < ApplicationController
     else
       flash[:alert] = 'Ошибка! У Вас недостаточно прав.'
     end
-    redirect_to root_path
+    redirect_to root_path, info: 'Пост удалён.', status: :see_other
   end
 
   private
 
   def find_post
-    @post = Post.find_by id: params[:id]
-    return if @post
-
-    flash[:danger] = 'Пост НЕ найден'
-    redirect_to root_path, info: 'deleted', status: :see_other
+    @post = Post.find(params[:id])
   end
 
   def post_params

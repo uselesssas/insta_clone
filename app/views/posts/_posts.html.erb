@@ -1,57 +1,10 @@
 <% @posts.each do |post| %>
-
-  <%= link_to user_path(post.user) do %>
-    <%= image_tag avatar_url(post.user) %>
-  <% end %>
-
-  <%= link_to post_path(post) do %>
-   <p><%= post.description %></p>
-  <% end %>
-
-  <% post.photos.each do |photo| %>
-    <%= image_tag photo.image.url(:standard) %>
-  <% end %>
-
-  <% if post.liked?(current_user).present? %>
-    <%= link_to 'Убрать лайк', like_path(post.liked?(current_user)), data: {turbo_method: :delete}, remote: true %>
-  <% else %>
-    <%= link_to 'Лайк', post_likes_path(post), data: {turbo_method: :post}, remote: true %>
-  <% end %>
-
-
-  <% post.likes.each.with_index do |like, index| %>
-    <% if post.likes.size == 1 %>
-      <%= like.user.username %> likes this
-    <% elsif like == post.likes.last %>
-      and
-      <%= + like.user.username %> like this
-    <% elsif index > 1 %>
-      <%= 'and' + (post.likes.size-index).to_s + ' others' %> like this
-      <% break %>
-    <% elsif index == post.likes.size-2 || index == 1 %>
-      <%= like.user.username %>
-    <% else %>
-      <%= like.user.username + ', ' %>
-    <% end %>
-  <% end %>
-
-
-  <% if post.belongs_to_user?(current_user) %>
-    <%= link_to 'Удалить пост', post_path(post), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-  <% end %>
-<% end %>
-<br><br>
-
-
-<% @posts.each do |post| %>
   <div class="card mb-3 post-link">
-
     <div class="card-body">
       <%= link_to user_path(post.user) do %>
         <%= image_tag avatar_url(post.user), class: 'user-avatar', align: 'middle' %>
         <small><%= post.user.username %></small>
       <% end %>
-      <i class="fa fa-trash"></i>
     </div>
 
     <% post.photos.each do |photo| %>
@@ -60,29 +13,73 @@
 
     <div class="card-body">
       <p class="card-text"><small class="text-muted">
-        <%= "Last updated #{post.updated_at}" %>
+        <%= "Last updated: #{post.updated_at}" %>
       </small></p>
 
       <%= link_to post_path(post) do %>
         <p><%= post.description %></p>
       <% end %>
+
+      <% if post.liked?(current_user).present? %>
+        <%= link_to icon('bi bi-heart-fill'), like_path(post.liked?(current_user)),
+                    data: {turbo_method: :delete}, remote: true %>
+      <% else %>
+        <%= link_to icon('bi bi-heart'), post_likes_path(post), data: {turbo_method: :post}, remote: true %>
+      <% end %>
+
+      <% if post.in_bookmarks?(current_user).present? %>
+        <%= link_to icon('bi bi-bookmark-fill'), bookmark_path(post.in_bookmarks?(current_user)),
+                    data: {turbo_method: :delete}, remote: true %>
+      <% else %>
+        <%= link_to icon('bi bi-bookmark'), post_bookmarks_path(post), data: {turbo_method: :post}, remote: true %>
+      <% end %>
+
+      <% if post.belongs_to_user?(current_user) %>
+        <%= link_to icon('bi bi-trash3'), post_path(post),
+                    data: {turbo_method: :delete, turbo_confirm: 'Удалить пост?'} %>
+      <% end %>
     </div>
-
-
 
     <hr>
+
     <div class="card-body">
       <p class="card-text">
-        rrr
+        <% post.comments.each do |comment| %>
+          <%= comment.user.username %>
+          <%= comment.body %>
+          <% if comment.user == current_user %>
+            <%= link_to 'Del', comment_path(comment), data: {turbo_method: :delete}, remote: true %>
+          <% end %>
+        <% end %>
+      </p>
+      <p class="card-text">
+        <%= form_for [post, Comment.new], :html => {:class => "w-100"}, remote: true do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :post_id, value: post.id %>
+          <%= f.text_field :body, placeholder: "Add a comment ...", autocomplete: :off %>
+          <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+        <% end %>
       </p>
 
-    </div>
 
+    </div>
   </div>
 <% end %>
 
 
 
-
-
-
+<%# post.likes.each.with_index do |like, index| %>
+<%# if post.likes.size == 1 %>
+<!--      <%#= like.user.username %> likes this-->
+<%# elsif like == post.likes.last %>
+<!--      and-->
+<!--      <%#= + like.user.username %> like this-->
+<%# elsif index > 1 %>
+<!--      <%#= 'and' + (post.likes.size-index).to_s + ' others' %> like this-->
+<%# break %>
+<%# elsif index == post.likes.size-2 || index == 1 %>
+<%#= like.user.username %>
+<%# else %>
+<%#= like.user.username + ', ' %>
+<%# end %>
+<%# end %>

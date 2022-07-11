@@ -29,10 +29,10 @@
 
 <%# User tabs %>
 <div class="user-tabs">
-  <%= link_to icon('fa fa-th', 'ФОТОКАРТОЧКИ'), user_path(current_user), class: 'tab active' %>
+  <%= link_to icon('bi bi-grid-3x3-gap-fill', 'ФОТОКАРТОЧКИ'), user_path(current_user), class: 'tab active' %>
 
   <% if @user == current_user %>
-    <%= link_to icon('fa fa-heart', 'ПОНРАВИЛОСЬ'), user_path(current_user), class: 'tab' %>
-    <%= link_to icon('fa fa-bookmark', 'ЗАКЛАДКИ'), user_path(current_user), class: 'tab' %>
+    <%= link_to icon('bi bi-heart-fill', 'ПОНРАВИЛОСЬ'), user_path(current_user), class: 'tab' %>
+    <%= link_to icon('bi bi-bookmark-fill', 'ЗАКЛАДКИ'), user_path(current_user), class: 'tab' %>
   <% end %>
 </div>

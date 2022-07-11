@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     @posts = @post.photos
     # @likes = @post.likes.includes(:user)
     @likes = @post.likes.all
+    @comment = Comment.new
   end
 
   def destroy

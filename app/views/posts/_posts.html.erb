@@ -26,6 +26,7 @@
       <% else %>
         <%= link_to icon('bi bi-heart'), post_likes_path(post), data: {turbo_method: :post}, remote: true %>
       <% end %>
+      <%= post.likes.count %>
 
       <% if post.in_bookmarks?(current_user).present? %>
         <%= link_to icon('bi bi-bookmark-fill'), bookmark_path(post.in_bookmarks?(current_user)),

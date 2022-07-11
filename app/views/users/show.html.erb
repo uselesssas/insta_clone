@@ -18,8 +18,8 @@
     </div>
     <ul class="posts">
       <li><b><%= @user.posts.count %></b> постов</li>
-      <li><b>0</b> подписчиков</li>
-      <li><b>0</b> подписок</li>
+      <li><b><%= @user.following_users.count %></b> подписчиков</li>
+      <li><b><%= @user.followees.count %></b> подписок</li>
     </ul>
     <h2 class="name"><%= @user.real_name %></h2>
     <div class="bio"><%= @user.bio %></div>
@@ -36,3 +36,18 @@
     <%= link_to icon('bi bi-bookmark-fill', 'ЗАКЛАДКИ'), user_path(current_user), class: 'tab' %>
   <% end %>
 </div>
+
+
+
+<% if @user.id == current_user.id %>
+  <p>You</p>
+<% elsif current_user.followees.include?(@user) %>
+  <%= button_to "Unfollow", unfollow_user_path(@user), data: {turbo_method: :post}  %>
+<% else %>
+  <%= button_to "Follow", follow_user_path(@user), data: {turbo_method: :post}  %>
+<% end %>
+
+  <%#= link_to 'Followers', user_followers_path(@user) %>
+  <%#= link_to 'Following', user_followees_path(@user) %>
+  <br>
+

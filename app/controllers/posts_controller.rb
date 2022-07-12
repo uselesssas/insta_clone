@@ -2,28 +2,29 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show destroy]
 
   def index
-    @posts = Post.order(created_at: :desc)
-    # @posts = Post.all.includes(:photos, :user, :likes).order('created_at desc')
+    @posts = Post.includes(:user, :photos, :comments, :likes, :bookmarks).order(created_at: :desc)
     @post = Post.new
   end
 
   def create
     @post = current_user.posts.build(post_params)
-    if params[:images]
+
+    if params[:images].to_a.count > 3
+      flash[:alert] = 'Ошибка! Слишком много фотографий, можно загрузить максимум 3 фотографии в одном посте.'
+    elsif params[:images]
       if @post.save
         params[:images].each do |img|
           @post.photos.create(image: img)
         end
-        redirect_to posts_path
         flash[:notice] = 'Пост сохранён.'
       else
         flash[:alert] = 'Ошибка! Не удалось сохранить пост.'
-        redirect_to posts_path
       end
     else
-      redirect_to posts_path
       flash[:alert] = 'Ошибка! Пожалуйста, добавьте одну или несколько фотографий к посту.'
     end
+
+    redirect_to posts_path
   end
 
   def show

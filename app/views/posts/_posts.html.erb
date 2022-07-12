@@ -46,11 +46,12 @@
     <div class="card-body">
       <p class="card-text">
         <% post.comments.each do |comment| %>
-          <%= comment.user.username %>
+          <b><%= comment.user.username + ':' %></b>
           <%= comment.body %>
           <% if comment.user == current_user %>
-            <%= link_to 'Del', comment_path(comment), data: {turbo_method: :delete}, remote: true %>
+            <%= link_to icon('bi bi-x'), comment_path(comment), data: {turbo_method: :delete}, remote: true %>
           <% end %>
+          <br>
         <% end %>
       </p>
       <p class="card-text">
@@ -61,8 +62,6 @@
           <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
         <% end %>
       </p>
-
-
     </div>
   </div>
 <% end %>

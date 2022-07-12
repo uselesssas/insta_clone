@@ -9,15 +9,20 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
-      params[:images]&.each do |img|
-        @post.photos.create(image: img)
+    if params[:images]
+      if @post.save
+        params[:images].each do |img|
+          @post.photos.create(image: img)
+        end
+        redirect_to posts_path
+        flash[:notice] = 'Пост сохранён.'
+      else
+        flash[:alert] = 'Ошибка! Не удалось сохранить пост.'
+        redirect_to posts_path
       end
-      redirect_to posts_path
-      flash[:notice] = 'Пост сохранён.'
     else
-      flash[:alert] = 'Ошибка! Не удалось сохранить пост.'
       redirect_to posts_path
+      flash[:alert] = 'Ошибка! Пожалуйста, добавьте одну или несколько фотографий к посту.'
     end
   end
 

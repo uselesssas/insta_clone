@@ -5,7 +5,7 @@ class BookmarksController < ApplicationController
       @post = @bookmark.post
       redirect_to posts_path
     else
-      flash[:alert] = 'Ошибка! Не удалось поставить лайк.'
+      flash[:alert] = 'Ошибка! Не удалось сохранить в избранное.'
     end
   end
 
@@ -13,15 +13,15 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
     @post = @bookmark.post
     if @bookmark.destroy
-      redirect_to posts_path, info: 'Лайк убран.', status: :see_other
+      redirect_to posts_path, info: 'Успех!', status: :see_other
     else
-      flash[:alert] = 'Ошибка! Не удалось убрать лайк.'
+      flash[:alert] = 'Ошибка! Не удалось убрать из избранного.'
     end
   end
 
   private
 
   def bookmark_params
-    params.permit :user_id, :post_id
+    params.permit(:user_id, :post_id)
   end
 end

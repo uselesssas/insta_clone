@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       @post = @comment.post
       redirect_to root_path
     else
-      flash[:alert] = "Something went wrong ..."
+      flash[:alert] = 'Ошибка! Не удалось оставить комментарий.'
     end
   end
 
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       redirect_to root_path
     else
-      flash[:alert] = "Something went wrong ..."
+      flash[:alert] = 'Ошибка! Не удалось удалить комментарий.'
     end
   end
 

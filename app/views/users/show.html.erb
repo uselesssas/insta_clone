@@ -10,16 +10,16 @@
   <div class="user-info col-md-8">
     <div class="user-section">
       <h2 class="username"><%= @user.username %></h2>
-      <% if @user == current_user %>
-        <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
-          <button class="btn btn-outline-dark">Редактировать профиль</button>
-        </a>
-      <% end %>
+      <div class="mb-lg-2">
+        <%= render 'button' %>
+      </div>
+
+
     </div>
     <ul class="posts">
       <li><b><%= @user.posts.count %></b> постов</li>
-      <li><b><%= @user.following_users.count %></b> подписчиков</li>
-      <li><b><%= @user.followees.count %></b> подписок</li>
+      <li><b><%= @user.following_users.count %></b> <%= link_to 'подписчиков', user_followers_path(@user) %></li>
+      <li><b><%= @user.followees.count %></b> <%= link_to 'подписок', user_followings_path(@user) %></li>
     </ul>
     <h2 class="name"><%= @user.real_name %></h2>
     <div class="bio"><%= @user.bio %></div>
@@ -36,18 +36,3 @@
     <%= link_to icon('bi bi-bookmark-fill', 'ЗАКЛАДКИ'), user_path(current_user), class: 'tab' %>
   <% end %>
 </div>
-
-
-
-<% if @user.id == current_user.id %>
-  <p>You</p>
-<% elsif current_user.followees.include?(@user) %>
-  <%= button_to "Unfollow", unfollow_user_path(@user), data: {turbo_method: :post}  %>
-<% else %>
-  <%= button_to "Follow", follow_user_path(@user), data: {turbo_method: :post}  %>
-<% end %>
-
-  <%#= link_to 'Followers', user_followers_path(@user) %>
-  <%#= link_to 'Following', user_followees_path(@user) %>
-  <br>
-

@@ -1,0 +1,7 @@
+<% if @user == current_user %>
+  <%= button_to 'Редактировать профиль', edit_user_path(current_user), method: :get, class: 'btn btn-outline-dark' %>
+<% elsif current_user.followees.include?(@user) %>
+  <%= button_to "Отписаться", unfollow_user_path(@user), data: {turbo_method: :post}, class: 'btn btn-outline-dark' %>
+<% else %>
+  <%= button_to "Подписаться", follow_user_path(@user), data: {turbo_method: :post}, class: 'btn btn-outline-dark' %>
+<% end %>

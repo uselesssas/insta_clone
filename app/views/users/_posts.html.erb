@@ -1,0 +1,6 @@
+<% @posts.each do |post| %>
+  <% post.photos.each do |photo| %>
+    <%= image_tag photo.image.url(:standard), class: 'card-img-top' %>
+    <br><br>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 <h1>Подписчики</h1>
 <% @followers.each do |u| %>
-  <%= u.username %>
+  <%= link_to u.username, user_path(u) %>
   <br>
 <% end %>

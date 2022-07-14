@@ -18,8 +18,8 @@
     </div>
     <ul class="posts">
       <li><b><%= @user.posts.count %></b> постов</li>
-      <li><b><%= @user.following_users.count %></b> <%= link_to 'подписчиков', user_followers_path(@user) %></li>
-      <li><b><%= @user.followees.count %></b> <%= link_to 'подписок', user_followings_path(@user) %></li>
+      <li><b><%= @user.following_users.count %></b> <%= link_to 'подписчиков', followers_user_path(@user) %></li>
+      <li><b><%= @user.followees.count %></b> <%= link_to 'подписок', followings_user_path(@user) %></li>
     </ul>
     <h2 class="name"><%= @user.real_name %></h2>
     <div class="bio"><%= @user.bio %></div>

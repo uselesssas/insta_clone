@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    # @comments = @post.comments.includes(:user)
-    @comments = @post.comments.all
+    @comments = @post.comments.includes(:user)
   end
 
   def create

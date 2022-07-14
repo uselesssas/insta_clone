@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
-  has_many :likes
   has_many :comments
-  has_many :bookmarks, dependent: :destroy
+  has_many :likes
+  has_many :bookmarks
 
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users

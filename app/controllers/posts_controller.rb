@@ -29,22 +29,17 @@ class PostsController < ApplicationController
 
   def show
     @posts = @post.photos
-    # @likes = @post.likes.includes(:user)
-    @likes = @post.likes.all
+    @likes = @post.likes
     @comment = Comment.new
   end
 
   def destroy
-    if @post.user == current_user
-      if @post.destroy
-        flash[:notice] = 'Пост удалён.'
-      else
-        flash[:alert] = 'Ошибка! Не удалось удалить пост.'
-      end
+    if @post.destroy
+      flash[:notice] = 'Пост удалён.'
     else
-      flash[:alert] = 'Ошибка! У Вас недостаточно прав.'
+      flash[:alert] = 'Ошибка! Не удалось удалить пост.'
     end
-    redirect_to root_path, info: 'Пост удалён.', status: :see_other
+    redirect_to root_path
   end
 
   private

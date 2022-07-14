@@ -13,7 +13,7 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
     @post = @like.post
     if @like.destroy
-      redirect_to posts_path, info: 'Лайк убран.', status: :see_other
+      redirect_to posts_path
     else
       flash[:alert] = 'Ошибка! Не удалось убрать лайк.'
     end
@@ -22,6 +22,6 @@ class LikesController < ApplicationController
   private
 
   def like_params
-    params.permit :post_id
+    params.permit(:post_id)
   end
 end

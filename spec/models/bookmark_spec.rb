@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe Bookmark, type: :model do
   context 'validation test' do
-    subject { build(:user) }
+    subject { build(:bookmark) }
 
-    it 'user is valid' do
+    it 'bookmark is valid' do
       is_expected.to be_valid
     end
   end

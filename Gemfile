@@ -23,6 +23,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.1.2'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do

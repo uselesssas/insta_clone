@@ -50,7 +50,7 @@
         <% post.comments.each do |comment| %>
           <b><%= comment.user.username + ':' %></b>
           <%= comment.body %>
-          <% if comment.user == current_user %>
+          <% if comment.user == current_user || (post.user == current_user) %>
             <%= link_to icon('bi bi-x'), comment_path(comment), data: {turbo_method: :delete}, remote: true %>
           <% end %>
           <br>

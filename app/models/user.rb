@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
-  has_many :comments
-  has_many :likes
-  has_many :bookmarks
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users
@@ -14,5 +14,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 20 }
+  validates :real_name, length: { minimum: 2, maximum: 20 }
+  validates :bio, length: { maximum: 300 }
+  validates :gender, length: { maximum: 20 }
 end

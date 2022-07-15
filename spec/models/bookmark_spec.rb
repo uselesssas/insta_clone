@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Bookmark, type: :model do
-  context 'validation test' do
-    subject { build(:bookmark) }
-
-    it 'bookmark is valid' do
-      is_expected.to be_valid
-    end
-  end
+RSpec.describe Like, type: :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:post) }
+  # it { should validate_uniqueness_of(:user_id).scoped_to(:post_id) }
 end

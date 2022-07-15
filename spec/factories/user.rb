@@ -7,7 +7,7 @@ FactoryBot.define do
     real_name { FFaker::Name.name }
     website { FFaker::InternetSE.http_url }
     bio { FFaker::Lorem.sentence }
-    phone { FFaker::PhoneNumber.imei }
+    phone { FFaker::PhoneNumber.area_code }
     gender { FFaker::Gender.random }
   end
 end

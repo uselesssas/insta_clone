@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :likes, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :bookmarks, -> { order(created_at: :desc) }, dependent: :destroy
 
+  validates :description, length: { minimum: 3, maximum: 50 }
+
   def belongs_to_user?(user)
     Post.find_by(user_id: user.id, id: id)
   end

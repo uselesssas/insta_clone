@@ -9,7 +9,7 @@ module ErrorHandling
 
     def notfound
       # logger.warn exception
-      redirect_to root_path, info: 'Страница не найдена.', status: :see_other
+      redirect_to root_path
       flash[:danger] = 'Страница не найдена.'
     end
   end

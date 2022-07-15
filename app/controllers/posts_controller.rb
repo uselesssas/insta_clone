@@ -34,10 +34,14 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.destroy
-      flash[:notice] = 'Пост удалён.'
+    if @post.user == current_user
+      if @post.destroy
+        flash[:notice] = 'Пост удалён.'
+      else
+        flash[:alert] = 'Ошибка! Не удалось удалить пост.'
+      end
     else
-      flash[:alert] = 'Ошибка! Не удалось удалить пост.'
+      flash[:notice] = 'Ошибка! недостаточно прав!'
     end
     redirect_to root_path
   end

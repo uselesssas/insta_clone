@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: %i[show follow unfollow followers followings]
 
   def show
-    @posts = @user.posts.includes(:photos, :comments, :likes, :bookmarks).order(created_at: :desc)
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit; end
